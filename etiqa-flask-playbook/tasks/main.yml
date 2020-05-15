@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  become: true
+ 
+  tasks:
+    - name: Install flask
+      package:
+        name: python-flask
+        state: present 
+
+  roles:
+    - role: geerlingguy.mysql
+      become: yes
