@@ -1,29 +1,21 @@
 ---
 language: python
-python: "2.7"
+services: docker
 
-# Use the new container infrastructure
-sudo: false
-
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-pip
+env:
+  global:
+    - ROLE_NAME: etiqa-flask-playbook
+  matrix:
+    - MOLECULE_DISTRO: ubuntu1804
+    - MOLECULE_DISTRO: ubuntu1604
 
 install:
-  # Install ansible
-  - pip install ansible
-
-  # Check ansible version
-  - ansible --version
-
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
+  # Install test dependencies.
+  - pip install molecule yamllint ansible-lint docker
 
 script:
-  # Basic role syntax check
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  # Run tests.
+  - molecule converge
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

@@ -10,3 +10,6 @@
   roles:
     - role: geerlingguy.mysql
       become: yes
+
+    - role: azavea.gunicorn
+      become: yes
