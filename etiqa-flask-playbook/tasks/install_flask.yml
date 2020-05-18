@@ -1,0 +1,12 @@
+---
+- hosts: all
+  strategy: debug
+  become: true
+
+  tasks:
+    - name: Include deployment playbook
+      include: main.yml
+  
+  roles:
+    - role: geerlingguy.mysql
+      become: yes

@@ -1,0 +1,6 @@
+---
+
+  - name: Install flask
+    package:
+      name: python-flask
+      state: present 
