@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    mysql_python_package_debian: python3-mysqldb
+  tasks:
+    - name: "Include etiqa-flask-playbook"
+      include_role:
+        name: "etiqa-flask-playbook"
+
+  roles:
+    - geerlingguy.mysql

@@ -1,14 +1,8 @@
 ---
 
-- hosts: all
-  become: true
- 
-  tasks:
-    - name: Install flask
-      package:
-        name: python-flask
-        state: present 
+  - name: Include deployment playbook
+    include: dependencies.yml
 
-  roles:
-    - role: geerlingguy.mysql
-      become: yes
+  # roles:
+  #   - role: geerlingguy.mysql
+  #     become: yes
