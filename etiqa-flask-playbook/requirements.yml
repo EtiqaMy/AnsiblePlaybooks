@@ -2,5 +2,5 @@
 - src: https://github.com/geerlingguy/ansible-role-mysql.git
   name: geerlingguy.mysql
 
-- src: https://github.com/azavea/ansible-gunicorn.git
-  name: azavea.gunicorn
+- src: redbeard28.pip3
+  name: redbeard28.pip3

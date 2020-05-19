@@ -11,5 +11,5 @@
     - role: geerlingguy.mysql
       become: yes
 
-    - role: azavea.gunicorn
+    - role: redbeard28.pip3
       become: yes
