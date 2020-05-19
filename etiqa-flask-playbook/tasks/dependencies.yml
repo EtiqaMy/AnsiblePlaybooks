@@ -4,3 +4,8 @@
     package:
       name: python-flask
       state: present 
+
+  - name: Install git
+    package:
+      name: git
+      state: present 
