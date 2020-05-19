@@ -9,3 +9,8 @@
     package:
       name: git
       state: present 
+
+  - name: Install gunicorn via pip
+    pip:
+     executable: pip3
+     name: gunicorn

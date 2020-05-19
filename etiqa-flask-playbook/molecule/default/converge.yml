@@ -10,3 +10,4 @@
 
   roles:
     - geerlingguy.mysql
+    - redbeard28.pip3
