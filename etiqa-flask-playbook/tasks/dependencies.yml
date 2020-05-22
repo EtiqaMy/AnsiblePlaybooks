@@ -3,14 +3,15 @@
   - name: Install flask
     package:
       name: python-flask
-      state: present 
+      state: present
 
   - name: Install git
     package:
       name: git
-      state: present 
+      state: present
 
-  - name: Install gunicorn via pip
-    pip:
-     executable: pip3
-     name: gunicorn
+  - name: Install virtualenv
+    package:
+      name: python3-virtualenv
+      state: present
+

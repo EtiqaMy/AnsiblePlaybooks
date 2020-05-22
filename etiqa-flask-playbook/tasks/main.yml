@@ -1,7 +1,7 @@
 ---
 
   - name: Include deployment playbook
-    include: dependencies.yml
+    include_tasks: dependencies.yml
 
   # roles:
   #   - role: geerlingguy.mysql
