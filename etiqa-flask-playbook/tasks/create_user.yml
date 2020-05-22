@@ -1,0 +1,12 @@
+---
+# tasks file for ata-smas
+
+- name: Create a web user
+  user:
+    name: "{{ smas.username }}"
+    password: "{{ smas.password }}"
+    state: present
+    shell: /bin/bash       # Defaults to /bin/bash
+    system: no             # Defaults to no
+    createhome: yes        # Defaults to yes
+

@@ -1,0 +1,8 @@
+---
+# vars file for system user to be created
+
+username: 'smas'
+password: '$6$wjQ5HgmHdnsEZ3$VW1xVgdJ1FuYeW4ROYx.InTb/PWby7GC5rFljFI1OAmyc7DsEBFmW0dWsl0ucY90Ggpc5URQZ/dPB2Augy/xV.'
+
+app: 'smas-app'
+app_path: "/home/smas/smas-app"

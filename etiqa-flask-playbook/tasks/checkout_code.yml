@@ -1,0 +1,20 @@
+---
+- name: Read git credentials
+  include_vars:
+    file: ../vars/gitlab.yml
+  no_log: true
+
+- name: Clone code from git
+  become: yes
+  git:
+     repo: "https://{{ gituser }}:{{ gitpass }}@gitlab.com/ata-team/ata-pillar-v/social-media-search-api-official.git"
+     dest: "{{ smas.app_path }}"
+
+- name: Change the ownership of the directory
+  become: yes
+  file:
+    path: "{{ smas.app_path }}"
+    owner: "{{ smas.username }}"
+    recurse: yes
+  register: chgrpout
+
