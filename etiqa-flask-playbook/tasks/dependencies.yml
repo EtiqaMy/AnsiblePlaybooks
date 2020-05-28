@@ -1,17 +1,10 @@
 ---
 
-  - name: Install flask
+  - name: Install required packages
     package:
-      name: python-flask
+      name: "{{ item }}"
       state: present
-
-  - name: Install git
-    package:
-      name: git
-      state: present
-
-  - name: Install virtualenv
-    package:
-      name: python3-virtualenv
-      state: present
-
+    with_items:
+      - git
+      - python-flask
+      - python3-virtualenv

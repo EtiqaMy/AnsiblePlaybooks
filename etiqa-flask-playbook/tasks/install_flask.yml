@@ -4,15 +4,13 @@
   become: true
 
   tasks:
-    - name: Read application-specific variables
+    - name: Read variables and credentials
       include_vars:
-        file: "../vars/smas.yml"
-        name: smas
-
-    - name: Read twitter credentials
-      include_vars:
-        file: "../vars/twitter-creds.yml"
-        name: twitter
+        file: "../vars/{{ item.filename }}"
+        name: "{{ item.varname }}"
+      with_items:
+        - { filename: smas.yml, varname: smas }
+        - { filename: twitter-creds.yml, varname: twitter }
       no_log: true
 
     - name: Include deployment playbook
