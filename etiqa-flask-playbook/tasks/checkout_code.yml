@@ -16,5 +16,4 @@
     path: "{{ smas.app_path }}"
     owner: "{{ smas.username }}"
     recurse: yes
-  register: chgrpout
 
