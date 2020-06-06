@@ -1,16 +1,10 @@
 ---
 
-  - name: Install flask
+  - name: Install required packages
     package:
-      name: python-flask
-      state: present 
-
-  - name: Install git
-    package:
-      name: git
-      state: present 
-
-  - name: Install gunicorn via pip
-    pip:
-     executable: pip3
-     name: gunicorn
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - git
+      - python-flask
+      - python3-virtualenv

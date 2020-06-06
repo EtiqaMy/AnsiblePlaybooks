@@ -4,9 +4,66 @@
   become: true
 
   tasks:
+    - name: Read variables and credentials
+      include_vars:
+        file: "../vars/{{ item.filename }}"
+        name: "{{ item.varname }}"
+      with_items:
+        - { filename: smas.yml, varname: smas }
+        - { filename: twitter-creds.yml, varname: twitter }
+      no_log: true
+
     - name: Include deployment playbook
-      include: main.yml
-  
+      include_tasks: main.yml
+
+    - name: Create application user
+      include_tasks: create_user.yml
+
+    - name: Checkout source code
+      include_tasks: checkout_code.yml
+
+    # Note: This will also install gunicorn
+    - name: Install application requirements
+      pip:
+        chdir: " {{smas.app_path }}"
+        requirements: "{{ smas.app_path }}/requirements.txt"
+        virtualenv: "/home/{{ smas['username'] }}/virtualenv/{{ smas.app }}"
+        virtualenv_python: python3
+
+    - stat: path="/tmp/{{ smas.app }}-app.pid"
+      register: gunicorn_pid
+
+    - name: Stop gunicorn if it's running
+      shell: "pkill -F /tmp/{{ smas.app }}-app.pid"
+      when: gunicorn_pid.stat.exists
+      ignore_errors: yes
+
+    - name: Ensure gunicorn pid is not recycled
+      file:
+        path: "/tmp/{{ smas.app }}-app.pid"
+        state: absent
+
+    - name: Start gunicorn as specific user
+      gunicorn:
+        app: 'main:app'
+        chdir: "{{ smas.app_path }}"
+        # venv: '/usr/local/bin'
+        venv: "/home/{{ smas.username }}/virtualenv/{{ smas.app }}"
+        pid: "/tmp/{{ smas.app }}-app.pid"
+        user: "{{ smas.username }}"
+      environment:
+        twitter_consumer_key: "{{ twitter.twitter_consumer_key }}"
+        twitter_consumer_secret: "{{ twitter.twitter_consumer_secret }}"
+        twitter_access_token_key: "{{ twitter.twitter_access_token_key }}"
+        twitter_access_token_secret: "{{ twitter.twitter_access_token_secret }}"
+
+
+    # TODO:
+    # - config file for gunicorn to specify log file location, port number, number of workers, timeout, etc
+    # - Create mysql user, db, table, all for the SMAS app. SQL file is at /home/smas/smas-app/setup/setup.sql
+    # - Add nginx config to port forward port 80 to gunicorn port
+
+
   roles:
     - role: geerlingguy.mysql
       become: yes
