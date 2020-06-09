@@ -1,0 +1,13 @@
+---
+# Install all the roles from ansible-galaxy. 
+# Requirements for this to work: 1. Ansible and 2. Working internet connection to ansible-galaxy
+
+# Install NVM
+
+  - src: https://github.com/moviedo/ansible-role-nvm.git
+    name: moviedo.nvm
+
+# Install PM2
+
+  - src: https://github.com/treinberger/ansible-role-pm2.git
+    name: treinberger.pm2 

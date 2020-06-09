@@ -1,0 +1,38 @@
+---
+- hosts: all
+  vars_files:
+      - ~/ata-nodejs/vars/main.yml
+  pre_tasks:
+
+      - name: install EPEL repo
+        yum: 
+          name: epel-release
+          state: present
+
+      - name: Install Nginx
+        yum:
+            name: nginx 
+            state: latest
+            update_cache: true
+
+      - name: Start Nginx
+        service:
+            name: nginx 
+            state: started
+
+      - name: Restart nginx
+        service:
+           name: nginx
+           state: restarted
+
+  roles:
+    - moviedo.nvm
+    - treinberger.pm2
+#     - weareinteractive.pm2
+  vars:
+    nvm_user: ec2-user
+    nvm_version: "v0.35.2"
+    nvm_node_version: "12.14.1"
+    pm2_user: root
+    pm2_startup: systemd
+  become: yes
