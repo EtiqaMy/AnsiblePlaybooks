@@ -16,3 +16,4 @@ install:
 script:
   # Run tests.
   - cd etiqa-flask-playbook && molecule converge
+  - cd ata-nodejs && molecule converge

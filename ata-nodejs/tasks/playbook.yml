@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars_files:
-      - ~/ata-nodejs/vars/main.yml
+      - ~/AnsiblePlaybooks/ata-nodejs/vars/main.yml
   pre_tasks:
 
       - name: install EPEL repo
@@ -28,11 +28,5 @@
   roles:
     - moviedo.nvm
     - treinberger.pm2
-#     - weareinteractive.pm2
-  vars:
-    nvm_user: ec2-user
-    nvm_version: "v0.35.2"
-    nvm_node_version: "12.14.1"
-    pm2_user: root
-    pm2_startup: systemd
+    
   become: yes

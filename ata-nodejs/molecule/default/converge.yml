@@ -17,6 +17,5 @@
     nvm_version: "v0.35.2"
     nvm_node_version: "12.14.1"
     pm2_user: root
-    #pm2_startup: systemd
     ansible_user: root
-    #pm2_upstart: false
+    

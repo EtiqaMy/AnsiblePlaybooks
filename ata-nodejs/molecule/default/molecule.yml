@@ -1,6 +1,8 @@
 ---
 dependency:
   name: galaxy
+  options:
+    role-file: requirements_ata.yml
 driver:
   name: docker
 platforms:
