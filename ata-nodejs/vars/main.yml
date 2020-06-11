@@ -27,8 +27,9 @@ nodejs_npm_global_packages: []
 # The path of a package.json file used to install packages globally.
 nodejs_package_json_path: ""
 
-nvm_user: ec2-user
+nvm_user: root
 nvm_version: "v0.35.2"
 nvm_node_version: "12.14.1"
 pm2_user: root
-pm2_startup: systemd
+pm2_startup: centos
+ansible_user: root

@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars_files:
-      - ~/AnsiblePlaybooks/ata-nodejs/vars/main.yml
+      - ../vars/main.yml
   pre_tasks:
 
       - name: install EPEL repo

@@ -1,2 +1,36 @@
 ---
 # tasks file for ata-nodejs
+#  - name: install EPEL repo
+#    yum: 
+#      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#      state: present
+ - name: Install dependencies (RedHat).
+   yum: name={{ item }} state=present
+   when: ansible_os_family == 'RedHat'
+   with_items:
+      - cronie
+      - epel-release
+
+ - name: un-Install Nginx
+   package:
+      name: nginx 
+      state: absent
+      update_cache: true
+
+ - name: Install Nginx
+   package:
+      name: nginx 
+      state: present
+      update_cache: true
+
+ - name: Start Nginx
+   systemd:
+     name: nginx 
+     state: started
+
+#  - name: Restart nginx
+#    service:
+#       name: nginx
+#       state: restarted
+
+

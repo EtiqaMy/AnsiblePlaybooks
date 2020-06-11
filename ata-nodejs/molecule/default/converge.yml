@@ -3,19 +3,19 @@
   hosts: all
   become: true
 
-  tasks:
+  vars_files:
+      - ../../vars/main.yml
+
+  pre_tasks:
     - name: "Include ata-nodejs"
-      include_role:
-        name: "ata-nodejs"
+      include: ../../tasks/main.yml 
 
   roles:
     - moviedo.nvm
     - treinberger.pm2
 
   vars:
-    nvm_user: root
+    nvm_user: ec2-user
     nvm_version: "v0.35.2"
     nvm_node_version: "12.14.1"
     pm2_user: root
-    ansible_user: root
-    
