@@ -1,0 +1,29 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements_ata.yml
+driver:
+  name: docker
+platforms:
+  - name: instance
+     # image: "geerlingguy/docker-amazonlinux2-ansible:latest"
+    # image: "jsmigel/centos-epel:latest"
+    # image: "ansible/centos7-ansible:latest"
+    # image: "mallear/amazonlinux2-systemd:latest"
+    # image: "keepersecurity/amazonlinux2-systemd:latest"
+#    image: "darwinjs/amazonlinux2ec2build:latest"
+#    volumes:
+#      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+#    pre_build_image: true
+#    privileged: true
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

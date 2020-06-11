@@ -1,0 +1,32 @@
+---
+- hosts: all
+  vars_files:
+      - ../vars/main.yml
+  pre_tasks:
+
+      - name: install EPEL repo
+        yum: 
+          name: epel-release
+          state: present
+
+      - name: Install Nginx
+        yum:
+            name: nginx 
+            state: latest
+            update_cache: true
+
+      - name: Start Nginx
+        service:
+            name: nginx 
+            state: started
+
+      - name: Restart nginx
+        service:
+           name: nginx
+           state: restarted
+
+  roles:
+    - moviedo.nvm
+    - treinberger.pm2
+    
+  become: yes

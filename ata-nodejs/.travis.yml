@@ -4,7 +4,7 @@ services: docker
 
 env:
   global:
-    - ROLE_NAME: etiqa-flask-playbook
+    - ROLE_NAME: ata-nodejs
   matrix:
     - MOLECULE_DISTRO: ubuntu1804
     - MOLECULE_DISTRO: ubuntu1604
@@ -15,4 +15,7 @@ install:
 
 script:
   # Run tests.
-  - cd etiqa-flask-playbook && molecule converge && cd ../ata-nodejs && molecule converge
+  - molecule converge
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
